@@ -60,3 +60,11 @@ Launch the instance.
 ![alt text](screenshots/01-ec2-instance-created.png)
 
 
+# TASK 3
+
+Connect via SSH
+
+![alt text](<screenshots/02-ssh connected.png>)
+
+SSH connected
+
