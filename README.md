@@ -68,3 +68,17 @@ Connect via SSH
 
 SSH connected
 
+# PHASE 2 - install Docker on EC2
+
+Step 1: Update the Server
+
+sudo dnf update -y
+
+Step 2: Install Docker
+
+sudo dnf install docker -y
+
+verify with: docker --version
+
+![alt text](screenshots/03-docker-installed.png)
+
