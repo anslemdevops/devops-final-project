@@ -140,3 +140,92 @@ Docker was successfully installed and the Docker service was running.
 
 
 ![alt text](screenshots/05-docker-ps.png) 
+
+
+
+
+
+# Flask Portfolio Application
+
+## Objective
+
+Replace the plain text Flask response with a professional HTML portfolio page using Flask templates.
+
+## Step 1: Create the HTML Template
+
+Created a template file:
+
+```text
+templates/index.html
+```
+
+Added the following HTML content:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anslem Iwebor Portfolio</title>
+</head>
+<body>
+    <h1>Welcome to Anslem Iwebor's Portfolio</h1>
+    <p>Junior Cloud & DevOps Engineer</p>
+
+    <h2>Skills</h2>
+    <ul>
+        <li>AWS</li>
+        <li>Docker</li>
+        <li>Terraform</li>
+        <li>Ansible</li>
+        <li>GitHub Actions</li>
+    </ul>
+</body>
+</html>
+```
+
+## Step 2: Update Flask Application
+
+Modified `app.py` to render the HTML template.
+
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+```
+
+## Step 3: Run the Application
+
+Started the Flask application:
+
+```bash
+python app.py
+```
+
+Application output:
+
+```text
+* Running on all addresses (0.0.0.0)
+* Running on http://127.0.0.1:5000
+```
+
+## Step 4: Verify the Application
+
+Opened the application in a browser:
+
+```text
+http://localhost:5000
+```
+
+The portfolio page was displayed successfully.
+
+## Screenshot
+
+![alt text](screenshots/05-flask-portfolio-home.png)
+
