@@ -229,3 +229,52 @@ The portfolio page was displayed successfully.
 
 ![alt text](screenshots/05-flask-portfolio-home.png)
 
+
+
+
+## Installing Git on the EC2 Instance
+
+Git was installed on the Amazon Linux 2023 EC2 instance to enable cloning and managing the project repository directly on the server.
+
+### Install Git
+
+
+sudo dnf install git -y
+
+
+### Verify Installation
+
+
+git --version
+
+
+### Output
+
+```text id="e1rzxb"
+git version <your-version>
+```
+
+### Screenshot
+
+![Git Installed](screenshots/git-installed-ec2.png)
+
+
+
+## Cloning the GitHub Repository
+
+The project repository was cloned from GitHub onto the EC2 instance.
+
+### Clone Repository
+
+
+git clone https://github.com/anslemdevops/devops-final-project.git
+
+### Verify Repository
+
+ls
+
+
+### Screenshot
+
+![alt text](<screenshots/08-github repository cloned.png>)
+
