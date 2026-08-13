@@ -64,48 +64,79 @@ Launch the instance.
 
 Connect via SSH
 
+## Phase 1: AWS EC2 Provisioning
+
+### Objective
+
+Provision a cloud server to host the portfolio and Java applications.
+
+### EC2 Configuration
+
+| Setting       | Value                       |
+| ------------- | --------------------------- |
+| Name          | devops-final-project-server |
+| OS            | Amazon Linux 2023           |
+| Instance Type | t2.micro                    |
+
+### Security Group
+
+* SSH (22)
+* HTTP (80)
+* Portfolio App (5000)
+* Java App (8080)
+
+### Screenshots
+
+#### EC2 Instance Running
+
+![EC2](screenshots/01-ec2-created.png)
+
+#### SSH Connection
+
+![SSH](screenshots/02-ssh-connected.png)
+
+
 ![alt text](<screenshots/02-ssh connected.png>)
 
 SSH connected
 
 # PHASE 2 - install Docker on EC2
 
-Step 1: Update the Server
+## Phase 2: Docker Installation
 
+### Objective
+
+Install Docker on the EC2 instance to host containerized applications.
+
+### Commands Used
+
+```bash
 sudo dnf update -y
-
-Step 2: Install Docker
-
 sudo dnf install docker -y
-
-verify with: docker --version
-
-![alt text](screenshots/03-docker-installed.png)
-
-
-# STEP 3 - Start Docker
-
 sudo systemctl start docker
-
 sudo systemctl enable docker
-
-check status:
-
-sudo systemctl status docker
-
-![alt text](screenshots/04-docker-running.png) 
-
-
-# Step 4: Allow EC2 User to Run Docker
-
 sudo usermod -aG docker ec2-user
-
-Apply the change:
-
 newgrp docker
-
-Test:
-
 docker ps
+```
+
+### Verification
+
+Docker was successfully installed and the Docker service was running.
+
+### Screenshots
+
+#### Docker Installed
+
+![Docker Installed](screenshots/03-docker-installed.png)
+
+#### Docker Service Running
+
+![Docker Running](screenshots/04-docker-running.png)
+
+#### Docker Verification
+
+![Docker PS](screenshots/05-docker-ps.png)
+
 
 ![alt text](screenshots/05-docker-ps.png) 
