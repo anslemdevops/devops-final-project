@@ -82,3 +82,30 @@ verify with: docker --version
 
 ![alt text](screenshots/03-docker-installed.png)
 
+
+# STEP 3 - Start Docker
+
+sudo systemctl start docker
+
+sudo systemctl enable docker
+
+check status:
+
+sudo systemctl status docker
+
+![alt text](screenshots/04-docker-running.png) 
+
+
+# Step 4: Allow EC2 User to Run Docker
+
+sudo usermod -aG docker ec2-user
+
+Apply the change:
+
+newgrp docker
+
+Test:
+
+docker ps
+
+![alt text](screenshots/05-docker-ps.png) 
