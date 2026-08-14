@@ -278,8 +278,7 @@ ls
 
 ### Screenshot
 
-![alt text](screenshots/08-github repository cloned.png)
-
+![alt text](screenshots/09-github-repository.png)
 
 
 ![alt text](screenshots/09-github-push-success.png)
@@ -288,3 +287,146 @@ ls
 
 # Pushing Changes to GitHub
 
+# Docker Compose Deployment 
+
+## Overview
+
+After creating Docker images for both the Flask Portfolio application and the Java web application, Docker Compose was used to deploy and manage the applications on an Amazon EC2 instance.
+
+The deployment process included:
+
+* Building the Docker images
+* Creating and starting containers
+* Verifying container health
+* Testing application accessibility through a web browser
+
+---
+
+## Building the Applications
+
+The existing containers were stopped and removed before rebuilding the images because there was an error.
+
+### Command
+
+
+docker compose down
+docker compose build --no-cache
+
+
+### Build Output
+
+The build process successfully created Docker images for both applications.
+
+![alt text](screenshots/11-docker-compose-up.png)
+
+
+
+## Starting the Containers
+
+Docker Compose was used to create and start the containers in detached mode.
+
+### Command
+
+
+docker compose up -d
+
+
+### Result
+
+* Docker network created successfully
+* Portfolio application container started
+* Java application container started
+
+**Screenshot**
+
+![alt text](screenshots/11-docker-compose-up.png)
+
+---
+
+## Verifying Running Containers
+
+After deployment, the running containers were verified using Docker.
+
+### Command
+
+
+docker ps
+
+
+### Result
+
+Two containers were running successfully:
+
+| Container     | Purpose                     | Port |
+| ------------- | --------------------------- | ---- |
+| portfolio_app | Flask Portfolio Application | 5000 |
+| java_app      | Java Web Application        | 8080 |
+
+**Screenshot**
+
+![alt text](screenshots/12-docker-ps.png)
+
+
+
+## Testing the Portfolio Application
+
+The Flask Portfolio application was accessed through the EC2 public IP address.
+
+### URL
+
+
+http://<44.223.102.157 >:5000
+
+
+### Verification
+
+The application loaded successfully in the browser, confirming that:
+
+* The Flask application was running correctly
+* Docker port mapping was working
+* Security group rules allowed inbound traffic
+
+**Screenshot**
+
+![alt text](screenshots/13-portfolio-browser.png)
+
+
+
+## Testing the Java Application
+
+The Java application was accessed through the EC2 public IP address.
+
+### URL
+
+
+http://<44.223.102.157 >:8080
+
+
+### Verification
+
+The application loaded successfully in the browser, confirming that:
+
+* Tomcat was running correctly
+* The application was deployed successfully
+* Docker networking and port forwarding were functioning properly
+
+**Screenshot**
+
+![alt text](screenshots/14-java-app-browser.png)
+
+
+
+## Deployment Summary
+
+The deployment was completed successfully using Docker Compose on an Amazon EC2 instance.
+
+### Successfully Verified
+
+* Docker images built successfully
+* Containers created and started successfully
+* Docker networking configured correctly
+* Flask Portfolio Application accessible on port 5000
+* Java Application accessible on port 8080
+* Browser accessibility verified for both applications
+
+This deployment demonstrates the use of containerization and orchestration tools to manage multiple applications in a consistent and repeatable manner.
