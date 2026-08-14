@@ -255,7 +255,7 @@ git version <your-version>
 
 ### Screenshot
 
-devops-final-project/screenshots/06-git-installed-ec2.png
+![alt text](project/screenshots/06-git-installed-ec2.png)
 
 
 
@@ -269,6 +269,8 @@ The project repository was cloned from GitHub onto the EC2 instance.
 
 git clone https://github.com/anslemdevops/devops-final-project.git
 
+
+
 ### Verify Repository
 
 ls
@@ -276,11 +278,11 @@ ls
 
 ### Screenshot
 
-devops-final-project/screenshots/08-github repository cloned.png
+![alt text](screenshots/08-github repository cloned.png)
 
 
 
-devops-final-project/screenshots/09-github-push-success.png
+![alt text](screenshots/09-github-push-success.png)
 
 
 
