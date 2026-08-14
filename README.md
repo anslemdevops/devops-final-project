@@ -155,9 +155,9 @@ Replace the plain text Flask response with a professional HTML portfolio page us
 
 Created a template file:
 
-```text
+
 templates/index.html
-```
+
 
 Added the following HTML content:
 
@@ -204,24 +204,24 @@ if __name__ == '__main__':
 
 Started the Flask application:
 
-```bash
+
 python app.py
-```
+
 
 Application output:
 
-```text
+
 * Running on all addresses (0.0.0.0)
 * Running on http://127.0.0.1:5000
-```
+
 
 ## Step 4: Verify the Application
 
 Opened the application in a browser:
 
-```text
+
 http://localhost:5000
-```
+
 
 The portfolio page was displayed successfully.
 
@@ -250,7 +250,6 @@ git --version
 
 ### Output
 
-```text id="e1rzxb"
 git version <your-version>
 ```
 
