@@ -255,7 +255,8 @@ git version <your-version>
 
 ### Screenshot
 
-![Git Installed](screenshots/git-installed-ec2.png)
+devops-final-project/screenshots/06-git-installed-ec2.png
+
 
 
 
@@ -275,10 +276,12 @@ ls
 
 ### Screenshot
 
-![alt text](<screenshots/08-github repository cloned.png>)
+devops-final-project/screenshots/08-github repository cloned.png
 
 
-![alt text](screenshots/09-github-push-success.png)
+
+devops-final-project/screenshots/09-github-push-success.png
+
 
 
 # Pushing Changes to GitHub
