@@ -85,15 +85,12 @@ Provision a cloud server to host the portfolio and Java applications.
 * Portfolio App (5000)
 * Java App (8080)
 
-### Screenshots
 
 #### EC2 Instance Running
 
-![EC2](screenshots/01-ec2-created.png)
 
 #### SSH Connection
 
-![SSH](screenshots/02-ssh-connected.png)
 
 
 ![alt text](<screenshots/02-ssh connected.png>)
@@ -124,7 +121,6 @@ docker ps
 
 Docker was successfully installed and the Docker service was running.
 
-### Screenshots
 
 #### Docker Installed
 
@@ -225,7 +221,7 @@ http://localhost:5000
 
 The portfolio page was displayed successfully.
 
-## Screenshot
+
 
 ![alt text](screenshots/05-flask-portfolio-home.png)
 
@@ -253,9 +249,12 @@ git --version
 git version <your-version>
 ```
 
-### Screenshot
 
-![alt text](project/screenshots/06-git-installed-ec2.png)
+
+
+![alt text] (screenshots/06.git-installed-ec2.png)
+
+
 
 
 
