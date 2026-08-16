@@ -430,3 +430,445 @@ The deployment was completed successfully using Docker Compose on an Amazon EC2 
 * Browser accessibility verified for both applications
 
 This deployment demonstrates the use of containerization and orchestration tools to manage multiple applications in a consistent and repeatable manner.
+
+
+# Terraform
+
+    # 🚀 Infrastructure Provisioning with Terraform
+
+## Overview
+
+As part of the DevOps Modern End-to-End Deployment project, Terraform was used to provision AWS infrastructure using Infrastructure as Code (IaC). This approach ensures that infrastructure can be created, modified, and managed consistently through version-controlled configuration files.
+
+The infrastructure was deployed in AWS US East (N. Virginia) Region (`us-east-1`).
+
+---
+
+## Terraform Project Structure
+
+```text
+terraform/
+├── provider.tf
+├── main.tf
+├── variables.tf
+├── outputs.tf
+└── terraform.tfvars
+```
+
+### File Description
+
+| File | Purpose |
+|--------|---------|
+| provider.tf | Configures the AWS provider |
+| variables.tf | Defines reusable Terraform variables |
+| terraform.tfvars | Stores variable values |
+| main.tf | Contains infrastructure resource definitions |
+| outputs.tf | Displays useful deployment outputs |
+
+---
+
+## Infrastructure Created
+
+Terraform provisioned the following AWS resources:
+
+### Virtual Private Cloud (VPC)
+
+A dedicated VPC was created to provide network isolation for project resources.
+
+**Configuration**
+
+- CIDR Block: `10.0.0.0/16`
+- DNS Hostnames Enabled
+- DNS Resolution Enabled
+
+### Public Subnet
+
+A public subnet was created to host internet-facing resources.
+
+**Configuration**
+
+- CIDR Block: `10.0.1.0/24`
+- Availability Zone: `us-east-1a`
+- Auto-assign Public IP: Enabled
+
+### Internet Gateway
+
+An Internet Gateway was attached to the VPC to allow communication with the public internet.
+
+### Route Table
+
+A public route table was configured with:
+
+| Destination | Target |
+|------------|---------|
+| 0.0.0.0/0 | Internet Gateway |
+
+### Security Group
+
+A security group was created to allow access to the deployed applications.
+
+#### Inbound Rules
+
+| Port | Protocol | Purpose |
+|--------|----------|----------|
+| 22 | TCP | SSH Access |
+| 80 | TCP | HTTP Traffic |
+| 5000 | TCP | Flask Portfolio Application |
+| 8080 | TCP | Java Application |
+
+#### Outbound Rules
+
+| Port | Protocol | Destination |
+|--------|----------|------------|
+| All | All | 0.0.0.0/0 |
+
+### EC2 Instance
+
+A Linux EC2 instance was provisioned to host the applications.
+
+| Property | Value |
+|-----------|---------|
+| Instance Type | t3.micro |
+| Region | us-east-1 |
+| Key Pair | anslem-keypair |
+
+---
+
+## Terraform Workflow
+
+### Initialize Terraform
+
+```bash
+terraform init
+```
+
+Downloads and installs required providers.
+
+### Validate Configuration
+
+```bash
+terraform validate
+```
+
+Checks configuration syntax and structure.
+
+### Review Execution Plan
+
+```bash
+terraform plan
+```
+
+Displays resources that Terraform intends to create.
+
+### Apply Infrastructure
+
+```bash
+terraform apply
+```
+
+Creates AWS resources defined in the configuration files.
+
+---
+
+## Deployment Output
+
+Terraform successfully created the infrastructure and returned the following outputs:
+
+```text
+instance_id = i-06f5d59b6701f3887
+instance_public_ip = 100.60.80.25
+```
+
+---ssh -i ~/.ssh/anslem-keypair.pem ec2-user@100.60.80.25
+
+## Screenshots
+
+### Terraform Configuration Files
+
+![Terraform Files](screenshots/15-terraform-files-created.png)
+
+### Terraform Validation
+
+![Terraform Validate](screenshots/16-terraform-validate-success.png)
+
+### Terraform Plan
+
+![Terraform Plan](screenshots/17-terraform-plan.png)
+
+### Terraform Apply Success
+
+![Terraform Apply Success](screenshots/21-terraform-apply-success.png)
+
+### EC2 Instance Created
+
+![EC2 Instance](screenshots/22-terraform-ec2-created.png)
+
+### VPC Created
+
+![VPC Created](screenshots/23-terraform-vpc-created.png)
+
+### Security Group Configuration
+
+![Security Group](screenshots/24-terraform-security-group.png)
+
+---
+
+## Challenges Encountered and Resolution
+
+### Key Pair Error
+
+**Issue**
+
+```text
+InvalidKeyPair.NotFound
+```
+
+**Cause**
+
+Terraform referenced an incorrect key pair name.
+
+**Resolution**
+
+Updated:
+
+```hcl
+key_name = "anslem-keypair"
+```
+
+---
+
+### Availability Zone Constraint
+
+**Issue**
+
+```text
+Unsupported: Your requested instance type (t3.micro) is not supported in us-east-1e
+```
+
+**Cause**
+
+The selected Availability Zone did not support the requested instance type.
+
+**Resolution**
+
+The subnet was recreated in:
+
+```text
+us-east-1a
+```
+
+and deployment completed successfully.
+
+---
+
+## Benefits of Using Terraform
+
+- Infrastructure managed as code
+- Version-controlled deployments
+- Consistent and repeatable provisioning
+- Reduced manual AWS configuration
+- Faster deployment and recovery processes
+
+Terraform enabled automated provisioning of the complete AWS infrastructure required for hosting and managing the project applications.
+
+
+
+# Next Phase: Ansible
+
+
+Configuration Management with Ansible
+Overview
+
+Ansible was used as the configuration management tool to automate the setup and configuration of the AWS EC2 instance provisioned through Terraform.
+
+The objective was to eliminate manual server configuration and ensure that infrastructure could be configured consistently and repeatedly using Infrastructure as Code (IaC) principles.
+
+Ansible Architecture
+
+The Ansible control node was installed on the local Ubuntu WSL environment and connected securely to the target AWS EC2 instance using SSH key authentication.
+
+
+Local Machine (WSL Ubuntu)
+        |
+        | SSH
+        |
+        v
+AWS EC2 Instance
+        |
+        +-- Install Git
+        +-- Install Docker
+        +-- Start Docker Service
+        +-- Enable Docker on Boot
+
+
+
+# Ansible Project Structure
+
+ansible/
+├── ansible.cfg
+├── inventory
+└── playbook.yml
+
+
+ansible.cfg
+
+Used to define Ansible configuration settings.
+
+
+[defaults]
+inventory = inventory
+host_key_checking = False
+
+
+inventory
+
+Defines the target EC2 instance and SSH connection details.
+
+[web]
+100.60.80.25 ansible_user=ec2-user ansible_ssh_private_key_file=/home/anslem/.ssh/anslem-keypair.pem
+
+
+playbook.yml
+
+Contains the automation tasks executed on the EC2 instance.
+
+
+---
+- name: Configure DevOps Server
+  hosts: web
+  become: yes
+
+  tasks:
+
+    - name: Update packages
+      yum:
+        name: "*"
+        state: latest
+
+    - name: Install Git
+      yum:
+        name: git
+        state: present
+
+    - name: Install Docker
+      yum:
+        name: docker
+        state: present
+
+    - name: Start Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+
+
+
+
+Verifying Connectivity
+
+Before executing the playbook, connectivity between the Ansible control node and the EC2 instance was verified using the Ansible Ping module.
+
+Command
+
+
+ansible web -i inventory -m ping
+
+Output
+
+100.60.80.25 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+
+
+![alt text](screenshots/32-ansible-ping-success.png)
+
+
+
+Executing the Playbook
+
+The playbook was executed to automate server configuration.
+
+Command
+
+ansible-playbook -i inventory playbook.yml
+
+
+Tasks Performed
+Updated operating system packages
+Installed Git
+Installed Docker Engine
+Started Docker service
+Enabled Docker service at boot
+
+
+![alt text](screenshots/34-ansible-playbook-success.png)
+
+
+
+Validation
+
+After the playbook execution, the EC2 instance was validated to confirm successful installation and configuration.
+
+Verify Docker
+
+docker --version
+
+Output
+
+Docker version 25.0.14
+
+![alt text](screenshots/35-docker-installed-by-ansible.png)
+
+
+Verify Git
+
+git --version
+
+
+Output
+
+git version 2.47.3
+
+![alt text](screenshots/36-docker-git-installed.png)
+
+
+Verify Docker Service
+
+sudo systemctl status docker
+
+Output
+
+Active: active (running)
+
+
+![alt text](screenshots/37-docker-service-running.png)
+
+
+
+Benefits of Using Ansible
+Automated server configuration
+Reduced manual administrative effort
+Consistent and repeatable deployments
+Agentless architecture using SSH
+Infrastructure managed as code
+Faster provisioning of application servers
+Outcome
+
+The AWS EC2 instance was successfully configured using Ansible automation. Required dependencies were installed, Docker was configured and started automatically, and the server was prepared to host the containerized Portfolio and Java applications.
+
+
+![alt text](screenshots/31-ansible-ssh-success.png)
+
+
+
+## SSH Connectivity Verification
+
+Before running Ansible, SSH access to the target EC2 instance was verified.
+
+![SSH Connection Success](screenshots/29-ansible-ssh-success.png)
+
+
+
+# Part 2: CI/CD Pipeline Implementation Using GitHub Actions
