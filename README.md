@@ -872,3 +872,124 @@ Before running Ansible, SSH access to the target EC2 instance was verified.
 
 
 # Part 2: CI/CD Pipeline Implementation Using GitHub Actions
+
+
+# CI/CD Pipeline with GitHub Actions
+
+## Objective
+
+The objective of this phase was to automate the Continuous Integration (CI) process using GitHub Actions. The pipeline automatically validates and tests the project whenever code is pushed to the GitHub repository.
+
+---
+
+## GitHub Actions Workflow Structure
+
+A GitHub Actions workflow was created inside the following directory:
+
+
+.github/
+└── workflows/
+    └── deploy.yml
+
+
+### Screenshot
+
+
+![alt text](screenshots/43-github-actions-workflow-created.png)
+
+---
+
+## Workflow Configuration
+
+The workflow was configured to:
+
+* Trigger automatically on every push to the `main` branch
+* Check out the repository source code
+* Set up the required runtime environment
+* Validate project files
+* Execute CI pipeline stages
+* Report build status directly in GitHub Actions
+
+Example workflow trigger:
+
+```yaml
+on:
+  push:
+    branches:
+      - main
+```
+
+---
+
+## Source Code Commit
+
+After completing the Terraform, Ansible, Docker Compose, and Java application integration, all project files were committed to the repository.
+
+```bash
+git add .
+git commit -m "Add Terraform, Ansible, Java app, Docker Compose and GitHub Actions"
+git push origin main
+```
+
+### Screenshot
+
+
+![alt text](screenshots/09-github-push-success.png)
+
+
+
+## Pipeline Execution
+
+Once the code was pushed to GitHub, the workflow was automatically triggered by GitHub Actions.
+
+The CI pipeline executed successfully without errors and completed all configured stages.
+
+### Pipeline Details
+
+| Item          | Value              |
+| ------------- | ------------------ |
+| Workflow Name | DevOps CI Pipeline |
+| Branch        | main               |
+| Trigger       | Git Push           |
+| Status        | Success            |
+| Platform      | GitHub Actions     |
+
+---
+
+## Successful Workflow Run
+
+The GitHub Actions dashboard displayed a successful pipeline execution indicated by a green check mark.
+
+This confirms that:
+
+* The workflow file syntax was valid
+* GitHub Actions executed successfully
+* The repository structure was correctly configured
+* The CI pipeline was functioning as expected
+
+### Screenshot
+
+
+![alt text](screenshots/44-github-actions-success.png)
+
+
+---
+
+## CI/CD Outcome
+
+The implementation of GitHub Actions introduced automation into the project lifecycle. Every future code change pushed to the repository can automatically trigger validation and deployment stages, reducing manual effort and improving reliability.
+
+### Achievements
+
+* Automated Continuous Integration
+* GitHub Actions workflow creation
+* Automatic build triggering
+* Successful pipeline execution
+* Version-controlled deployment process
+* Foundation for future Continuous Deployment (CD)
+
+---
+
+## Summary
+
+GitHub Actions was successfully integrated into the DevOps project to provide CI/CD capabilities. The pipeline automatically executes whenever code is pushed to GitHub, ensuring consistency, automation, and improved software delivery practices.
