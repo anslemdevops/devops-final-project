@@ -992,3 +992,182 @@ The implementation of GitHub Actions introduced automation into the project life
 ## Summary
 
 GitHub Actions was successfully integrated into the DevOps project to provide CI/CD capabilities. The pipeline automatically executes whenever code is pushed to GitHub, ensuring consistency, automation, and improved software delivery practices.
+
+
+
+## Docker Image Build and Application Deployment
+
+After provisioning infrastructure with Terraform and configuring the server using Ansible, both applications were containerized and deployed using Docker.
+
+### Build Portfolio Application Image
+
+
+docker build -t portfolio-app ./portfolio
+
+
+### Build Java Application Image
+
+
+docker build -t java-app ./apps/java-app
+
+
+### Verify Images
+
+
+docker images
+
+
+### Run Portfolio Container
+
+
+docker run -d --name portfolio-container -p 5000:5000 portfolio-app
+
+
+### Run Java Application Container
+
+
+docker run -d --name java-container -p 8080:8080 java-app
+
+
+### Verify Running Containers
+
+
+docker ps
+
+
+Both containers were successfully deployed and exposed through their respective ports.
+
+
+
+![alt text](screenshots/45-java-build-success.png)
+
+![alt text](screenshots/46-docker-compose-installed.png)
+
+![alt text](screenshots/47-war-file-created.png)
+
+![alt text](screenshots/48-docker-compose-buildx-error.png)
+
+![alt text](screenshots/49-docker-permission-fixed.png)
+
+![alt text](screenshots/50-portfolio-image-built.png)
+
+![alt text](screenshots/51-portfolio-image-listed.png)
+
+![alt text](screenshots/52-java-image-built.png)
+
+![alt text](screenshots/53-docker-images-created.png)
+
+![alt text](screenshots/54-docker-containers-running.png)
+
+![alt text](screenshots/55-portfolio-running-browser.png)
+
+![alt text](screenshots/56-java-app-running-browser.png)
+
+
+
+
+# Project Results and Verification
+
+## Infrastructure Provisioning
+
+Terraform was used to provision AWS infrastructure including:
+
+* VPC
+* Public Subnet
+* Security Group
+* EC2 Instance
+
+Terraform successfully created all required resources.
+
+## Configuration Management
+
+Ansible was used to configure the EC2 server by:
+
+* Installing Docker
+* Installing Git
+* Starting and enabling Docker service
+
+## Application Containerization
+
+Two applications were containerized using Docker:
+
+### Portfolio Application
+
+A Flask-based portfolio website running on port 5000.
+
+### Java Application
+
+A Java web application packaged as a WAR file and deployed on Tomcat running on port 8080.
+
+## Docker Images
+
+Both application images were successfully built.
+
+
+docker images
+
+
+### Screenshot
+
+![alt text](screenshots/53-docker-images-created.png)
+
+## Running Containers
+
+Both containers were deployed successfully.
+
+
+docker ps
+
+
+
+
+![alt text](screenshots/54-docker-containers-running.png)
+
+## Application Testing
+
+### Portfolio Application
+
+Accessible through:
+
+
+http://100.60.80.25:5000
+
+
+
+
+![alt text](screenshots/55-portfolio-running-browser.png)
+
+### Java Application
+
+Accessible through:
+
+
+http://100.60.80.25:8080/sampleapp
+
+
+
+
+![alt text](screenshots/56-java-app-running-browser.png)
+
+## CI/CD Pipeline
+
+GitHub Actions was configured to automate application deployment tasks.
+
+The workflow executed successfully after code was pushed to GitHub.
+
+### Screenshot
+
+![GitHub Actions Success](screenshots/59-github-actions-success.png)
+
+## Project Outcome
+
+The project successfully demonstrates:
+
+* Infrastructure as Code (Terraform)
+* Configuration Management (Ansible)
+* Containerization (Docker)
+* Source Control (GitHub)
+* CI/CD Automation (GitHub Actions)
+* Cloud Deployment on AWS EC2
+
+All project objectives were completed successfully.
