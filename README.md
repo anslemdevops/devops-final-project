@@ -1157,7 +1157,9 @@ The workflow executed successfully after code was pushed to GitHub.
 
 ### Screenshot
 
-![GitHub Actions Success](screenshots/59-github-actions-success.png)
+![alt text](screenshots/59-cicd-pipeline-success.png)
+
+
 
 ## Project Outcome
 
@@ -1171,3 +1173,22 @@ The project successfully demonstrates:
 * Cloud Deployment on AWS EC2
 
 All project objectives were completed successfully.
+
+
+
+## GitHub Actions CI/CD Verification
+
+The GitHub Actions workflow was executed successfully after code was pushed to the repository.
+
+### Successful Workflow Run
+
+![alt text](screenshots/59-cicd-pipeline-success.png)
+
+### Validation Performed
+
+- Terraform initialization
+- Terraform validation
+- Python dependency installation
+- CI/CD workflow verification
+
+Result: Successful execution with a green status check.
